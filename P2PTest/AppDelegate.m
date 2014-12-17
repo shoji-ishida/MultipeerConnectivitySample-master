@@ -15,7 +15,7 @@
     // Override point for customization after application launch.
     self.userDefaults = [NSUserDefaults standardUserDefaults];
     NSDictionary *dict = @{
-                           @"name" : @"名前”,
+                           @"name":@"name"
                            };
     [self.userDefaults registerDefaults:dict];
     

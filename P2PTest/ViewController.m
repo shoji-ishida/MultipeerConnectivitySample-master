@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "PeerListViewController.h"
+#import "AppDelegate.h"
 
 static NSString * const SegueIdentifierPushPeerListView = @"PushPeerListViewSegue";
 
@@ -26,6 +27,10 @@ static NSString * const SegueIdentifierPushPeerListView = @"PushPeerListViewSegu
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    NSString *name = [appDelegate.userDefaults objectForKey:@"name"];
+    self.displayNameTextField.text = name;
 }
 
 - (void)didReceiveMemoryWarning
@@ -59,7 +64,9 @@ static NSString * const SegueIdentifierPushPeerListView = @"PushPeerListViewSegu
     if (self.displayNameTextField.text.length == 0) {
         return;
     }
-    
+    AppDelegate *appDelegate = (AppDelegate *)[[UIApplication sharedApplication] delegate];
+    [appDelegate.userDefaults setObject:(self.displayNameTextField.text) forKey:(@"name")];
+    [appDelegate.userDefaults synchronize];
     [self performSegueWithIdentifier:SegueIdentifierPushPeerListView sender:self];
 }
 
